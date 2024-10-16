@@ -1,6 +1,11 @@
-import { BAD_REQUEST, CONFLICT, CREATED } from "../constants/httpStatusCode.js";
+import {
+  BAD_REQUEST,
+  CONFLICT,
+  CREATED,
+  OK,
+} from "../constants/httpStatusCode.js";
 import { connectToDatabase } from "../database/db.config.js";
-import { hash } from "bcrypt";
+import { hash, compare } from "bcrypt";
 import { generateToken } from "../utils/token.utils.js";
 import { validateEmail } from "../utils/email.utils.js";
 
@@ -48,6 +53,43 @@ class AuthController {
       id: lastID,
       name,
       email,
+      auth: {
+        accessToken,
+      },
+    });
+  };
+
+  login = async (req, res) => {
+    const { email, password } = req.body;
+    const db = await connectToDatabase();
+    // verifica se todos os campos foram preenchidos
+    if (!email || !password) {
+      return res
+        .status(BAD_REQUEST)
+        .json({ message: "Email and password are required" });
+    }
+    // verifica se os campos não estão vazios
+    if (!email.trim() || !password.trim()) {
+      return res
+        .status(BAD_REQUEST)
+        .json({ message: "Email and password must not be empty" });
+    }
+    // verifica se o email existe
+    const user = await db.get(
+      "SELECT id, password FROM tb_users WHERE email = ?",
+      [email]
+    );
+    if (!user) {
+      return res.status(BAD_REQUEST).json({ message: "User not found" });
+    }
+    // verifica se a senha é a correta
+    const validPassword = await compare(password, user.password);
+    if (!validPassword) {
+      return res.status(BAD_REQUEST).json({ message: "Invalid password" });
+    }
+    const accessToken = generateToken(user.id);
+    return res.status(OK).json({
+      id: user.id,
       auth: {
         accessToken,
       },
