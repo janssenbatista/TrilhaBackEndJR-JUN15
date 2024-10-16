@@ -6,5 +6,6 @@ const taskRoutes = Router();
 
 taskRoutes.use(tokenMiddleware);
 taskRoutes.post("/tasks", TaskController.create);
+taskRoutes.get("/tasks", TaskController.findAll);
 
 export { taskRoutes };

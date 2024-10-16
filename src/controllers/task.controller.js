@@ -41,6 +41,16 @@ class TaskController {
       isDone,
     });
   };
+
+  findAll = async (req, res) => {
+    const { userId } = req;
+    const db = await connectToDatabase();
+    const tasks = await db.all(
+      "SELECT id, description, is_done FROM tb_tasks WHERE user_id = ?",
+      [userId]
+    );
+    return res.json(tasks);
+  };
 }
 
 export default new TaskController();
