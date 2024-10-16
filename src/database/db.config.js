@@ -20,5 +20,14 @@ export async function connectToDatabase() {
       password TEXT NOT NULL
     );`);
 
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS tb_tasks (
+      id TEXT NOT NULL PRIMARY KEY,
+      is_done BOOLEAN NOT NULL,
+      description TEXT NOT NULL,
+      user_id INTEGER NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES tb_users (id)
+    );`);
+
   return db;
 }

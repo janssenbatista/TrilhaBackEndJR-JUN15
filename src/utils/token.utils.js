@@ -7,13 +7,14 @@ export const generateToken = (userId) => {
   });
 };
 
-export const verifyToken = (token, res) => {
+export const verifyToken = (token, req, res, next) => {
   try {
     jwt.verify(token, process.env.JWT_SECRET, (error, data) => {
       if (error) {
         return res.status(UNAUTHORIZED).json({ message: "Invalid token" });
       }
-      res.userId = data.userId;
+      req.userId = data.userId;
+      next();
     });
   } catch (error) {
     return res.status(UNAUTHORIZED).json({ message: "Invalid token" });
