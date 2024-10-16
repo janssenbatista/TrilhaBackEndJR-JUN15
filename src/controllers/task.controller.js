@@ -1,5 +1,6 @@
 import {
   BAD_REQUEST,
+  CONFLICT,
   CREATED,
   FORBIDDEN,
   NOT_FOUND,
@@ -32,7 +33,7 @@ class TaskController {
     );
     if (task) {
       return res
-        .status(BAD_REQUEST)
+        .status(CONFLICT)
         .json({ message: "Task with this description already exists" });
     }
     // cria uma nova tarefa
@@ -78,7 +79,7 @@ class TaskController {
     // verifica se a tarefa existe
     const task = await db.get("SELECT * FROM tb_tasks WHERE id = ?", [taskId]);
     if (!task) {
-      return res.status(BAD_REQUEST).json({ message: "Task not found" });
+      return res.status(NOT_FOUND).json({ message: "Task not found" });
     }
     // verifica se o usuário tem permissão para atualizar a tarefa
     if (task.user_id !== userId) {
