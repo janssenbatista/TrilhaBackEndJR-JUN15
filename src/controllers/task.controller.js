@@ -33,12 +33,12 @@ class TaskController {
     const taskId = uuid();
     await db.run(
       "INSERT INTO tb_tasks (id, description, is_done, user_id) VALUES (?,?,?,?)",
-      [taskId, description, isDone, userId]
+      [taskId, description, isDone ?? false, userId]
     );
     return res.status(CREATED).json({
       id: taskId,
       description,
-      isDone,
+      isDone: isDone ?? false,
     });
   };
 
