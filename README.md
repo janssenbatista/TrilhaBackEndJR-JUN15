@@ -1,99 +1,72 @@
-![Código Certo Coders](https://utfs.io/f/3b2340e8-5523-4aca-a549-0688fd07450e-j4edu.jfif)
+## Todo API
+Api para gerenciamento de tarefas 📝
 
-# 📚 Trilha Inicial BackEnd Jr
-Este projeto tem como objetivo desenvolver uma API RESTful para gerenciamento de tarefas, proporcionando funcionalidades de CRUD (Create, Read, Update, Delete) de tarefas, autenticação de usuários e armazenamento dos dados em um banco de dados.
+### Pré-requisitos
+- NodeJS (v18 ou superior)
+- Npm (v10 ou superior)
 
-## Objetivos:
-- Criar uma API que permita CRUD (Create, Read, Update, Delete) de tarefas.
-- Implementar autenticação de usuários.
-- Utilizar um banco de dados SQLite para armazenar as tarefas.
-- Documentar todo o processo e apresentar as conclusões.
+### Instalação
 
-## Requisitos Funcionais:
-- Criar Tarefa: Endpoint para criar uma nova tarefa.
-- Listar Tarefas: Endpoint para listar todas as tarefas.
-- Atualizar Tarefa: Endpoint para atualizar uma tarefa existente.
-- Deletar Tarefa: Endpoint para deletar uma tarefa existente.
+1. Clone o repositório *(\*necessário ter o git instalado em sua máquina)*:
 
-## Autenticação de Usuários:
-- Registro de Usuário: Endpoint para registrar um novo usuário.
-- Login de Usuário: Endpoint para autenticar um usuário e gerar um token JWT.
-- Proteção de Rotas: Garantir que apenas usuários autenticados possam acessar os endpoints de tarefas.
+```bash
+git clone https://github.com/janssenbatista/TrilhaBackEndJR-JUN15.git
+```
 
-## Banco de Dados:
-- Utilizar SQLite como banco de dados para armazenar informações de usuários e tarefas.
+2. Navegue até o diretório do projeto
 
-   #### Estrutura do Projeto:
-   ```plaintext
-   project-root/
-   │
-   ├── src/
-   │   ├── controllers/
-   │   ├── models/
-   │   ├── routes/
-   │   ├── middlewares/
-   │   ├── database/
-   │   └── app.js
-   │
-   ├── .env
-   ├── .gitignore
-   ├── README.md
-   └── package.json
+```bash
+cd diretório-em-que-o-repositório-foi-clonado
+```
+
+3. Instale as dependências
+
+```bash
+npm install
+```
+
+### Configuração
+
+1. Crie um arquivo `.env` na raiz do projeto baseado no `.env.example`:
+
    ```
-## Entregáveis:
-   1. **Código Fonte:**
-      - Código fonte do projeto, organizado conforme a estrutura acima.
-   2. **Repositório GitHub:**
-      - Repositório público contendo o código fonte e documentação.
-   3. **Documentação:**
-      - README.md com instruções sobre como configurar e executar o projeto, além de detalhes dos endpoints da API.
+   cp .env.example .env
+   ```
 
-### Detalhes Técnicos: 🔧
-- **Boas Práticas:** Utilizar boas práticas de código limpo, legível e bem documentado.
-- **Git:** Utilizar Git para controle de versão e submeter o projeto através de um repositório público no GitHub.
+2. Edite o arquivo `.env` para adicionar o seu `JWT_SECRET`:
 
-### Dicas para Abordar o Projeto 🌟
-- **Crie um Fork desse Repositório.**
-- **Criar do Zero:** É fundamental que o projeto seja desenvolvido completamente do zero, demonstrando suas habilidades e criatividade desde o início.
-- **Utilize bibliotecas** como Express para criação da API e jsonwebtoken para autenticação.
-- **Documente cada etapa do processo para facilitar a compreensão.**
+   ```
+   JWT_SECRET=sua-chave-secreta-jwt
+   ```
 
-### Critérios de Avaliação: 📝
-- **Funcionalidade:** A aplicação atende aos requisitos funcionais e funciona corretamente?
-- **Qualidade do Código:** O código é limpo, bem estruturado e adequadamente documentado?
-- **Segurança:** A autenticação foi implementada corretamente e as rotas estão protegidas?
-- **Uso do Git:** O controle de versão é usado de forma eficaz com mensagens de commit significativas?
-- **Documentação:** A documentação é clara e detalha o processo de desenvolvimento e uso da API?
+### Execução
 
-### Não Queremos 🚫
-- Descobrir que o candidato não foi quem realizou o teste.
-- Ver commits grandes sem muita explicação nas mensagens no repositório.
-- Entregas padrão ou cópias de outros projetos. Buscamos originalidade e autenticidade em cada contribuição.
+- Para iniciar o servidor em modo de desenvolvimento, use o comando:
 
-### Prazo ⏳
-A data máxima para entrega das trilhas foi removida, permitindo que as pessoas entreguem conforme sua disponibilidade. No entanto, ainda é necessário concluir a trilha com sucesso para ser inserido em uma equipe.
+```
+npm run dev
+```
 
-### Instruções de Entrega: 📬
-Após finalizar o projeto, publique-o em uma URL pública (por exemplo, Vercel, Netlify, GitHub Pages, etc.) e hospede o seu servidor na nuvem. Use serviços que ofereçam uso gratiuto por um período, como a AWS e preencha o [Formulário](https://forms.gle/Nmyjwna23VW9rM7m9):  
+Isso iniciará o servidor em modo de escuta. Você pode acessar o projeto em `http://localhost:3000`.
 
----
+- Se preferir executar o projeto em produção, utilize:
 
-### Desafio da Inovação 🚀
-Achou esse projeto inicial simples? Eleve ainda mais! Estamos em busca de mentes inovadoras que não apenas criem, mas que também desafiem os padrões. Como você pode transformar essa estrutura inicial em algo verdadeiramente extraordinário? Demonstre o poder da sua criatividade e o impacto das suas ideias inovadoras!
+```
+npm start
+```
 
----
+### Scripts disponíveis
 
-🔗 **Mantenha-se Conectado:**
-- [Discord](discord.gg/y3GHwPvsMK)
-- [Website](http://www.codigocertocoders.com.br/)
-- [LinkedIn](https://www.linkedin.com/company/codigocertocoders/)
-  
-🌐 **Contato:**
-- Email: codigocertocoders@gmail.com
+- `npm run dev`: Inicia o servidor em modo de desenvolvimento.
+- `npm start`: Inicia o servidor em modo de produção.
 
----
+### Endpoints disponíveis
 
-### Precisa de Ajuda?
-Está com alguma dificuldade, encontrou algum problema no desafio ou tem alguma sugestão pra gente? Crie uma issue e descreva o que achar necessário.
-
-**Construindo o amanhã, hoje.**
+| Método   | Endpoint         | Descrição                |
+| -------- | ---------------- | ------------------------ |
+| `POST`   | `/auth/register` | Registra um novo usuário |
+| `POST`   | `/auth/login`    | Realiza login            |
+| `GET`    | `/tasks`         | Lista todas as tarefas   |
+| `POST`   | `/tasks`         | Cria uma nova tarefa     |
+| `PATCH`  | `/tasks/:taskId` | Atualiza uma tarefa      |
+| `DELETE` | `/tasks/:taskId` | Deleta uma tarefa        |
