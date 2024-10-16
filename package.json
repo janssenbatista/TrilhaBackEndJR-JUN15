@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/janssenbatista/TrilhaBackEndJR-JUN15/issues"
   },
-  "homepage": "https://github.com/janssenbatista/TrilhaBackEndJR-JUN15#readme"
+  "homepage": "https://github.com/janssenbatista/TrilhaBackEndJR-JUN15#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
 }
