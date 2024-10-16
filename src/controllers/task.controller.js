@@ -2,6 +2,7 @@ import {
   BAD_REQUEST,
   CREATED,
   FORBIDDEN,
+  NOT_FOUND,
   OK,
 } from "../constants/httpStatusCode.js";
 import { connectToDatabase } from "../database/db.config.js";
@@ -103,6 +104,24 @@ class TaskController {
       description,
       isDone,
     });
+  };
+
+  delete = async (req, res) => {
+    const { userId } = req;
+    const { taskId } = req.params;
+    const db = await connectToDatabase();
+    // verifica se a tarefa existe
+    const task = await db.get("SELECT * FROM tb_tasks WHERE id = ?", [taskId]);
+    if (!task) {
+      return res.status(NOT_FOUND).json({ message: "Task not found" });
+    }
+    // verifica se o usuário tem permissão para deletar a tarefa
+    if (task.user_id !== userId) {
+      return res.status(FORBIDDEN).send();
+    }
+    // deleta a tarefa
+    await db.run("DELETE FROM tb_tasks WHERE id = ?", [taskId]);
+    return res.status(OK).send();
   };
 }
 

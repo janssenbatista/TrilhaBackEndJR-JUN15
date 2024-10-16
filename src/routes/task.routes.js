@@ -8,5 +8,6 @@ taskRoutes.use(tokenMiddleware);
 taskRoutes.post("/tasks", TaskController.create);
 taskRoutes.get("/tasks", TaskController.findAll);
 taskRoutes.patch("/tasks/:taskId", TaskController.update);
+taskRoutes.delete("/tasks/:taskId", TaskController.delete);
 
 export { taskRoutes };
