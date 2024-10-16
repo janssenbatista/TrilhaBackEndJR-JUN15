@@ -1,4 +1,5 @@
 import { verifyToken } from "../utils/token.utils.js";
+import { UNAUTHORIZED } from "../constants/httpStatusCode.js";
 
 export const tokenMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
