@@ -12,5 +12,13 @@ export async function connectToDatabase() {
     driver: sqlite3.Database,
   });
 
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS tb_users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL UNIQUE,
+      password TEXT NOT NULL
+    );`);
+
   return db;
 }
